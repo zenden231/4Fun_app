@@ -34,21 +34,28 @@ namespace _4Fun_app
             IWebDriver driver = new FirefoxDriver();
             //IWebDriver driver = new ChromeDriver();
             driver.Url = ("https://prnt.sc/" + GenerateResource());
-            //Console.ReadLine();
             Thread.Sleep(2000);
+            Console.Write("Press q to exit or Enter to continue: ");
+            if (Console.ReadLine() == "q")
+            {
+                driver.Quit();
+                Environment.Exit(0);
+            }
             while (true)
             {
-                IWebElement body = driver.FindElement(By.TagName("body"));
+                /*
+                IWebElement body = driver.FindElement(By.TagName("body"));               
                 body.Click();
                 body.SendKeys(Keys.F11);
+                */
                 ReadOnlyCollection<string> windowHandles = driver.WindowHandles;
-                driver.SwitchTo().Window(windowHandles[1]);
-                driver.Url = ("https://prnt.sc/" + GenerateResource());
-                Console.Write("Press Enter ");
-                Thread.Sleep(800);
-                Console.ReadLine();
-                driver.Close();
                 driver.SwitchTo().Window(windowHandles[0]);
+                driver.Url = ("https://prnt.sc/" + GenerateResource());
+                //Console.Write("Press Enter ");
+                Thread.Sleep(800);
+                //Console.ReadLine();
+                //driver.Close();
+                //driver.SwitchTo().Window(windowHandles[0]);
                 Console.Write("Press q to exit or Enter to continue: ");
                 if (Console.ReadLine() == "q")
                 {
